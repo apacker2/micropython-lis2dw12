@@ -1,16 +1,6 @@
-#
-# This file is part of MicroPython LIS2HH12 driver
-# Copyright (c) 2017-2018 Mika Tuupola
-#
-# Licensed under the MIT license:
-#   http://www.opensource.org/licenses/mit-license.php
-#
-# Project home:
-#   https://github.com/tuupola/micropython-lis2hh12
-#
 
 """
-MicroPython I2C driver for LIS2HH12 3-axis accelerometer
+MicroPython I2C driver for LIS2DW12 3-axis accelerometer
 """
 
 import ustruct # pylint: disable=import-error
@@ -21,7 +11,7 @@ __version__ = "0.3.0-dev"
 
 _TEMP_L = const(0x0b)
 _TEMP_H = const(0x0c)
-# LIS2HH12: 0b01000001 = 0x41
+# LIS2DW12: 0b01000001 = 0x41
 # LIS2DH12: 0b00110011 = 0x33
 _WHO_AM_I = const(0x0f)
 _CTRL1 = const(0x20)
@@ -61,8 +51,8 @@ _SO_8G = 0.244 # 0.244 mg / digit
 SF_G = 0.001 # 1 mg = 0.001 g
 SF_SI = 0.00980665 # 1 mg = 0.00980665 m/s2
 
-class LIS2HH12:
-    """Class which provides interface to LIS2HH12 3-axis accelerometer."""
+class LIS2DW12:
+    """Class which provides interface to LIS2DW12 3-axis accelerometer."""
     def __init__(self, i2c=None, address=0x1e, odr=ODR_100HZ, fs=FS_2G, sf=SF_SI):
         if i2c is None:
             self.i2c = I2C(scl=Pin(26), sda=Pin(25))
@@ -71,12 +61,10 @@ class LIS2HH12:
 
         self.address = address
 
-        if 0x41 == self.whoami:
-            pass
-        elif 0x33 == self.whoami:
+        if 0x44 == self.whoami:
             pass
         else:
-            raise RuntimeError("LIS2HH12 or LIS2DH12 not found on I2C bus.")
+            raise RuntimeError("LIS2DW12 not found on I2C bus.")
 
         self._sf = sf
         self._odr(odr)

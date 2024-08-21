@@ -1,4 +1,5 @@
 # The MIT License (MIT)
+Original code is licensed as such:
 
 Copyright (c) 2017-2018 Mika Tuupola <tuupola@appelsiini.net>
 
