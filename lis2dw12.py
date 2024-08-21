@@ -53,9 +53,9 @@ SF_SI = 0.00980665 # 1 mg = 0.00980665 m/s2
 
 class LIS2DW12:
     """Class which provides interface to LIS2DW12 3-axis accelerometer."""
-    def __init__(self, i2c=None, address=0x1e, odr=ODR_100HZ, fs=FS_2G, sf=SF_SI):
+    def __init__(self, i2c=None, address=0x19, odr=ODR_100HZ, fs=FS_2G, sf=SF_SI):
         if i2c is None:
-            self.i2c = I2C(scl=Pin(26), sda=Pin(25))
+            self.i2c = I2C(1, scl=Pin(26), sda=Pin(25))
         else:
             self.i2c = i2c
 
